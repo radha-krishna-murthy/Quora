@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "questions")
+@Document(collection = "questions") 
 public class Question {
     @Id
     private String id;
@@ -26,6 +26,8 @@ public class Question {
     private String title;
     @Size(min=10,max=1000)
     private String content;
+
+    private Integer views;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate

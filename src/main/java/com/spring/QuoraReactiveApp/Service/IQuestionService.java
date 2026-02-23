@@ -11,3 +11,7 @@ public interface IQuestionService {
     Mono<QuestionResponseDTO> createQuestion(QuestionRequestDTO question);
     Flux<QuestionResponseDTO> paginationOffset(String searchTerm,int size,int page);
     Flux<QuestionResponseDTO> paginationCursor(String cursor, int size);
+    Mono<QuestionResponseDTO> getQuestionById(String id);
+}
+
+

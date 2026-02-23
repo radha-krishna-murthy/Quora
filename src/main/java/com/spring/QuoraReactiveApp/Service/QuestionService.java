@@ -61,4 +61,9 @@ public class QuestionService implements IQuestionService{
 
 
     }
+    @Override
+    public Mono<QuestionResponseDTO> getQuestionById(String id) {
+        return questionRepo.findById(id)
+        .map(QuestionMapper::toQuestionResponseDTO);
+    }
 }
