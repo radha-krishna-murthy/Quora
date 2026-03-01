@@ -1,17 +1,17 @@
 package com.spring.QuoraReactiveApp.Service;
 
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import com.spring.QuoraReactiveApp.dto.QuestionRequestDTO;
 import com.spring.QuoraReactiveApp.dto.QuestionResponseDTO;
-
-import java.time.LocalDateTime;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface IQuestionService {
-    Mono<QuestionResponseDTO> createQuestion(QuestionRequestDTO question);
-    Flux<QuestionResponseDTO> paginationOffset(String searchTerm,int size,int page);
+
+    Mono<QuestionResponseDTO> createQuestion(QuestionRequestDTO questionRequestDTO);
+
+    Flux<QuestionResponseDTO> paginationOffset(String searchTerm, int page, int size);
+
     Flux<QuestionResponseDTO> paginationCursor(String cursor, int size);
+
     Mono<QuestionResponseDTO> getQuestionById(String id);
 }
-
-

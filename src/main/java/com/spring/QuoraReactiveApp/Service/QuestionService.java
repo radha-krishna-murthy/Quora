@@ -13,19 +13,22 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
+import com.spring.events.ViewCountEvent;
+import com.spring.producers.KafkaEventProducer;
 
 @Service
 @RequiredArgsConstructor
 public class QuestionService implements IQuestionService{
     private final QuestionRepo questionRepo;
+    private final KafkaEventProducer kafkaEventProducer;
     @Override
     public Mono<QuestionResponseDTO> createQuestion(QuestionRequestDTO questionRequestDTO) {
       Question question=Question.builder()
                 .title(questionRequestDTO.getTitle())
                 .content(questionRequestDTO.getContent())
                 .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now()).
-              build();
+                .updatedAt(LocalDateTime.now())
+                .build();
       return questionRepo.save(question)
       .map(QuestionMapper::toQuestionResponseDTO)
       .doOnSuccess(questionResponseDTO -> {
@@ -45,7 +48,7 @@ public class QuestionService implements IQuestionService{
     @Override
     public Flux<QuestionResponseDTO> paginationCursor(String cursor, int size) {
      Pageable pageable=PageRequest.of(0,size);
-        if(!CursorUtils.isValidCusor(cursor)){
+        if (!CursorUtils.isValidCursor(cursor)) {
             return questionRepo.findAll10Questions(cursor,pageable)
                     .map(QuestionMapper::toQuestionResponseDTO);
         }
@@ -64,6 +67,15 @@ public class QuestionService implements IQuestionService{
     @Override
     public Mono<QuestionResponseDTO> getQuestionById(String id) {
         return questionRepo.findById(id)
-        .map(QuestionMapper::toQuestionResponseDTO);
+        .map(QuestionMapper::toQuestionResponseDTO)
+        .doOnError(error -> {
+          System.out.println("Error fetching question: " + error);
+      })
+        .doOnSuccess(questionResponseDTO -> {
+            System.out.println("Question fetched successfully: " + questionResponseDTO);
+            ViewCountEvent viewCountEvent =new ViewCountEvent(id,"question",LocalDateTime.now());
+            kafkaEventProducer.publishEventCount(viewCountEvent);
+        });
+        
     }
 }

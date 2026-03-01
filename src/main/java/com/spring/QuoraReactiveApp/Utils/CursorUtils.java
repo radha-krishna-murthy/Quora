@@ -5,13 +5,8 @@ package com.spring.QuoraReactiveApp.Utils;
 import java.time.LocalDateTime;
 
 public class CursorUtils {
-    public static boolean isValidCusor(String cursor){
-        if(cursor.length()==0 || cursor.isEmpty()){
-            return false;
-        }
-        else{
-            return true;
-        }
+    public static boolean isValidCursor(String cursor) {
+        return cursor != null && !cursor.isEmpty();
     }
     public static LocalDateTime parseCursor(String cursor){
         return LocalDateTime.parse(cursor);

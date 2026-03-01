@@ -1,4 +1,4 @@
-package com.Mapper;
+package com.spring.Mapper;
 import com.spring.QuoraReactiveApp.Entity.Question;
 import com.spring.QuoraReactiveApp.dto.QuestionResponseDTO;
 
