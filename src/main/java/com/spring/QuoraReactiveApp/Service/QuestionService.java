@@ -6,6 +6,8 @@ import com.spring.QuoraReactiveApp.Utils.CursorUtils;
 import com.spring.QuoraReactiveApp.dto.QuestionRequestDTO;
 import org.springframework.data.domain.Pageable;
 import com.spring.QuoraReactiveApp.dto.QuestionResponseDTO;
+import com.spring.QuoraReactiveApp.events.ViewCountEvent;
+import com.spring.QuoraReactiveApp.producers.KafkaEventProducer;
 import com.spring.QuoraReactiveApp.Mapper.QuestionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +15,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
-import com.spring.events.ViewCountEvent;
-import com.spring.producers.KafkaEventProducer;
 
 @Service
 @RequiredArgsConstructor

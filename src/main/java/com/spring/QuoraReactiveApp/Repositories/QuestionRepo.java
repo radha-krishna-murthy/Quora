@@ -23,4 +23,6 @@ public interface QuestionRepo extends ReactiveMongoRepository<Question,String> {
     @Query("{ $text: { $search: ?0 } }")
     Flux<Question> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String searchTerm, Pageable pageable);
     Flux<Question> findByCreatedAtGreaterThanOrderByCreatedAtAsc(LocalDateTime cursor, Pageable pageable);
+
+    
 }

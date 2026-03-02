@@ -1,21 +1,19 @@
-package com.spring.QuoraReactiveApp.dto;
+package com.spring.QuoraReactiveApp.events;
 
+// import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LikeResponseDTO {
-    private String id;
+public class ViewCountEvent {
     private String targetId;
     private String targetType;
-    private Boolean isLike;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime timestamp;
 }

@@ -1,6 +1,5 @@
 package com.spring.QuoraReactiveApp.Service;
 
-import com.spring.QuoraReactiveApp.Entity.Answer;
 import com.spring.QuoraReactiveApp.dto.AnswerRequestDTO;
 import com.spring.QuoraReactiveApp.dto.AnswerResponeDTO;
 
@@ -9,6 +8,13 @@ import reactor.core.publisher.Mono;
 
 public interface IAnswerService {
 
- public Mono<AnswerResponeDTO>createAnswer(AnswerRequestDTO answerRequestDTO);
- public Flux<AnswerResponeDTO> getAnswersById(String id);    
+    Mono<AnswerResponeDTO> createAnswer(AnswerRequestDTO answerRequestDTO);
+
+    Mono<AnswerResponeDTO> getAnswerById(String id);
+
+    Flux<AnswerResponeDTO> getAnswersByQuestionId(String questionId);
+
+    Mono<AnswerResponeDTO> updateAnswer(String id, AnswerRequestDTO answerRequestDTO);
+
+    Mono<Void> deleteAnswer(String id);
 }

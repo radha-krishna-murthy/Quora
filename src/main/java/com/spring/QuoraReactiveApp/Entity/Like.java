@@ -12,4 +12,5 @@ public class Like {
     private String targetType;
     private Boolean isLiked;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

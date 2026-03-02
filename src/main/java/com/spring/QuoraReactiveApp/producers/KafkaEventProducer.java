@@ -1,8 +1,10 @@
-package com.spring.producers;
+package com.spring.QuoraReactiveApp.producers;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import com.spring.events.ViewCountEvent;
+
+import com.spring.QuoraReactiveApp.events.ViewCountEvent;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -21,4 +23,6 @@ public class KafkaEventProducer {
             }
         });
     }
+
+   
 }

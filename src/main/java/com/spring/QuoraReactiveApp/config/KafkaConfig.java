@@ -1,4 +1,4 @@
-package com.spring.config;
+package com.spring.QuoraReactiveApp.config;
 
 import java.util.*;
 
