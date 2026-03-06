@@ -1,5 +1,8 @@
 package com.spring.QuoraReactiveApp.Service;
 
+import java.util.List;
+
+import com.spring.QuoraReactiveApp.Entity.QuestionElasticDocument;
 import com.spring.QuoraReactiveApp.dto.QuestionRequestDTO;
 import com.spring.QuoraReactiveApp.dto.QuestionResponseDTO;
 import reactor.core.publisher.Flux;
@@ -14,4 +17,7 @@ public interface IQuestionService {
     Flux<QuestionResponseDTO> paginationCursor(String cursor, int size);
 
     Mono<QuestionResponseDTO> getQuestionById(String id);
+
+    List<QuestionElasticDocument>searchQuestionByElasticSearch(String query);
+    
 }

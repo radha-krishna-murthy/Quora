@@ -49,7 +49,7 @@ public class QuestionController {
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found")));
     }
     @GetMapping("/elasticsearch")
-    public List<QuestionElasticDocument> getQuestionByElasticSearch(@RequestParam String query) {
+    public Flux<QuestionElasticDocument> getQuestionByElasticSearch(@RequestParam String query) {
         return questionService.searchQuestionByElasticSearch(query);
         
     }

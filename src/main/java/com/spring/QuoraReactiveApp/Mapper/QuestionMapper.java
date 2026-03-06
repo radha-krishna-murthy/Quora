@@ -1,6 +1,7 @@
 package com.spring.QuoraReactiveApp.Mapper;
 
 import com.spring.QuoraReactiveApp.Entity.Question;
+import com.spring.QuoraReactiveApp.Entity.QuestionElasticDocument;
 import com.spring.QuoraReactiveApp.dto.QuestionResponseDTO;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,13 @@ public class QuestionMapper {
                 .title(question.getTitle())
                 .content(question.getContent())
                 .createdAt(question.getCreatedAt())
+                .build();
+    }
+    public static QuestionElasticDocument toQuestionElasicDocument(Question question) {
+        return QuestionElasticDocument.builder()
+                .id(question.getId())
+                .title(question.getTitle())
+                .content(question.getContent())
                 .build();
     }
 }

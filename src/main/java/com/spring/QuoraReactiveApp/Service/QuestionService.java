@@ -89,7 +89,14 @@ public class QuestionService implements IQuestionService{
         });
         
     }
-    public List<QuestionElasticDocument>searchQuestionByElasticSearch(String query){
-      return questionDocumentRepo.findByTitleContainingOrContentContaining(query, query);
+    public Flux<QuestionElasticDocument>searchQuestionByElasticSearch(String query){
+      return questionDocumentRepo.findByTitleContainingOrContentContaining(query, query)
+      .map(QuestionMapper::toQuestionElasicDocument)
+      .doOnComplete(() -> {
+        System.out.println("Question fetched successfully");
+      })
+      .doOnError(error -> {
+        System.out.println("Error fetching question: " + error);
+      });
     }
 }

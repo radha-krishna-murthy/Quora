@@ -27,6 +27,8 @@ public class Question {
     @Size(min=10,max=1000)
     private String content;
 
+    private String userId;
+
     private Integer views;
     @CreatedDate
     private LocalDateTime createdAt;

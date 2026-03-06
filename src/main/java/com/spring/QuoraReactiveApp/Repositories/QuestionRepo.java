@@ -11,6 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Repository
@@ -23,6 +24,6 @@ public interface QuestionRepo extends ReactiveMongoRepository<Question,String> {
     @Query("{ $text: { $search: ?0 } }")
     Flux<Question> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String searchTerm, Pageable pageable);
     Flux<Question> findByCreatedAtGreaterThanOrderByCreatedAtAsc(LocalDateTime cursor, Pageable pageable);
-
+    Flux<Question>findByUserIdIn(List<String> followingIds);
     
 }
